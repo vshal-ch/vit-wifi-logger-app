@@ -6,10 +6,10 @@ export default function ActionButtons() {
     <View style={{ flex: 1 }}>
       <Pressable style={styles.loginBtn}>
         <Image style={styles.img} source={require("../assets/logo.png")} />
-        <Text style={styles.loginText}>Login</Text>
+        <Text style={styles.loginText}>login</Text>
       </Pressable>
       <Pressable style={styles.logoutBtn}>
-        <Text>Logout</Text>
+        <Text>logout</Text>
       </Pressable>
     </View>
   );

@@ -3,8 +3,8 @@ import { View, Text, StyleSheet } from "react-native";
 function Title() {
   return (
     <View style={styles.titleContainer}>
-      <Text style={styles.title}>Wifi</Text>
-      <Text style={styles.title}>Logger</Text>
+      <Text style={styles.title}>wifi</Text>
+      <Text style={styles.title}>logger</Text>
     </View>
   );
 }

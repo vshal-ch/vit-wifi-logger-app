@@ -2,18 +2,37 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 
 function ListItem({ username, content, selected, update }) {
   const helper = (e) => {
-    update(username);
+    update((list) => {
+      list = [...list];
+      for (let i of list) {
+        if (i["key"] === username) {
+          i["selected"] = true;
+        } else {
+          i["selected"] = false;
+        }
+      }
+      return list;
+    });
   };
   return (
     <Pressable
       style={[styles.container, selected ? styles.containerSelected : {}]}
       onPress={helper}
-      android_ripple={{ color: "#333" }}
+      android_ripple={{ color: "#d8d8d8" }}
     >
       <View style={styles.checkBoxContianerParent}>
         <View style={styles.checkBoxContianer}>
-          <View style={styles.checkbox}>
-            {selected && <View style={styles.innerCircle}></View>}
+          <View
+            style={[styles.checkbox, selected ? styles.checkboxSelected : {}]}
+          >
+            {selected && (
+              <View
+                style={[
+                  styles.innerCircle,
+                  selected ? styles.innerCircleSelected : {},
+                ]}
+              ></View>
+            )}
           </View>
         </View>
         <Text style={styles.text}>{content}</Text>
@@ -39,7 +58,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   containerSelected: {
-    backgroundColor: "#757575",
+    backgroundColor: "#999999",
+  },
+  checkboxSelected: {
+    borderColor: "#ddd",
+  },
+  innerCircleSelected: {
+    backgroundColor: "#ddd",
   },
   checkBoxContianerParent: {
     padding: 0,
