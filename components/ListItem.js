@@ -1,6 +1,9 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
+import { useState } from "react";
+import FloatingMenu from "./FloatingMenu";
 
 function ListItem({ username, content, selected, update }) {
+  const [menuOpen, setMenuState] = useState(false);
   const helper = (e) => {
     update((list) => {
       list = [...list];
@@ -37,11 +40,12 @@ function ListItem({ username, content, selected, update }) {
         </View>
         <Text style={styles.text}>{content}</Text>
       </View>
-      <Pressable style={styles.menu}>
+      <Pressable style={styles.menu} onPress={() => setMenuState(true)}>
         <View style={styles.smallCircle}></View>
         <View style={styles.smallCircle}></View>
         <View style={[styles.smallCircle, styles.mb]}></View>
       </Pressable>
+      <FloatingMenu open={menuOpen} setOpen={setMenuState} />
     </Pressable>
   );
 }
@@ -56,6 +60,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     borderRadius: 5,
     marginBottom: 10,
+    overflow: "visible",
   },
   containerSelected: {
     backgroundColor: "#999999",
@@ -106,7 +111,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlignVertical: "center",
   },
-  menu: {},
+  menu: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 20,
+  },
 });
 
 export default ListItem;
