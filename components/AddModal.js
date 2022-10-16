@@ -1,7 +1,7 @@
 import { Modal, Text, View, StyleSheet } from "react-native";
 import Form from "./Form";
 
-const AddModal = ({ visible, setVisible }) => {
+const AddModal = ({ visible, setVisible, data }) => {
   return (
     <Modal
       visible={visible}
@@ -12,10 +12,10 @@ const AddModal = ({ visible, setVisible }) => {
     >
       <View style={styles.container}>
         <View style={{ marginBottom: 24 }}>
-          <Text style={[styles.mainTitle, styles.colorWhite]}>add</Text>
+          <Text style={[styles.mainTitle, styles.colorWhite]}>{data ? "update" : "add"}</Text>
           <Text style={[styles.mainTitle, styles.colorWhite]}>credentials</Text>
         </View>
-        <Form setVisible={setVisible} />
+        <Form setVisible={setVisible} formdata={data} />
       </View>
     </Modal>
   );

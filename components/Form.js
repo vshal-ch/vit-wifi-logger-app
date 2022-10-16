@@ -3,16 +3,17 @@ import InputField from "./InputField";
 import { useState, useContext } from "react";
 import { ListContext } from "./ListContext";
 
-const Form = (props) => {
+const Form = ({ setVisible, formdata }) => {
   const { setCredList } = useContext(ListContext);
   const [data, setData] = useState({
-    username: "",
-    password: "",
-    alias: "",
+    username: formdata ? formdata.username : "",
+    password: formdata ? formdata.password : "",
+    alias: formdata ? formdata.alias : "",
     usernamevalid: true,
     passwordvalid: true,
     aliasvalid: true,
-    buttonvalid: false,
+    buttonvalid: formdata ? true : false,
+    similarerror: false,
   });
 
   const addCreds = () => {
@@ -20,9 +21,34 @@ const Form = (props) => {
       return;
     }
     setCredList((list) => {
-      let flag = list.some((item) => item.key == data.username);
+      if (formdata) {
+        let usernameChanged = true;
+        if (data.username === formdata.username) {
+          usernameChanged = false;
+        }
+        list = [...list];
+        if (usernameChanged && list.some((i) => i.username === data.username)) {
+          setData((e) => {
+            return { ...e, similarerror: true };
+          });
+          return list;
+        }
+        let i = list.findIndex((e) => e.username === formdata.username);
+        list[i]["username"] = data.username;
+        list[i]["password"] = data.password;
+        list[i]["alias"] =
+          data.alias.trim() === "" ? data.username : data.alias;
+        list[i]["key"] = data.username;
+        setVisible(false);
+        return list;
+      }
+      //adding credential
+      let flag = list.some((item) => item.username == data.username);
       if (flag) {
-        return;
+        setData((e) => {
+          return { ...e, similarerror: true };
+        });
+        return list;
       }
       list = [...list];
       let selected = list.length == 0 ? true : false;
@@ -34,7 +60,7 @@ const Form = (props) => {
         selected,
       };
       list.push(newobj);
-      props.setVisible(false);
+      setVisible(false);
       return list;
     });
   };
@@ -47,7 +73,7 @@ const Form = (props) => {
       <View style={styles.buttonContainer}>
         <Pressable
           style={[styles.button, { backgroundColor: "#333" }]}
-          onPress={() => props.setVisible(false)}
+          onPress={() => setVisible(false)}
         >
           <Text style={{ color: "#cdcdcd" }}>cancel</Text>
         </Pressable>
@@ -62,7 +88,7 @@ const Form = (props) => {
           ]}
           onPress={addCreds}
         >
-          <Text style={{ color: "#444" }}>add</Text>
+          <Text style={{ color: "#444" }}>{formdata ? "update" : "add"}</Text>
         </Pressable>
       </View>
     </>

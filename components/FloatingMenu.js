@@ -1,14 +1,18 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import React from "react";
 
-const FloatingMenu = ({ open, setOpen }) => {
+const FloatingMenu = ({ open, setOpen, updateModal, username }) => {
+  const handleClick = () => {
+    updateModal(username);
+    setOpen(false);
+  };
   return (
     <Pressable
       style={[styles.abs, open ? null : styles.none]}
       onPress={() => setOpen(false)}
     >
       <View style={styles.menu}>
-        <Pressable style={styles.action}>
+        <Pressable style={styles.action} onPress={handleClick}>
           <Text style={[styles.colorText]}>Update</Text>
         </Pressable>
         <Pressable style={styles.action}>
@@ -40,7 +44,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 5,
     alignItems: "flex-end",
-    paddingRight:15,
+    paddingRight: 15,
   },
   menu: {
     flexDirection: "row",

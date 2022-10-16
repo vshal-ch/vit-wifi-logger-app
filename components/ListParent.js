@@ -8,6 +8,7 @@ export function ListParent() {
   const [credList, setCredList] = useState([
     {
       username: "19BCI0086",
+      password:"asdf",
       key: "19BCI0086",
       alias: "19BCI0086",
       selected: true,

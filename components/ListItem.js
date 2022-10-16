@@ -2,13 +2,19 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import { useState } from "react";
 import FloatingMenu from "./FloatingMenu";
 
-function ListItem({ username, content, selected, update }) {
+function ListItem({
+  username,
+  content,
+  selected,
+  update,
+  openUpdateModal,
+}) {
   const [menuOpen, setMenuState] = useState(false);
   const helper = (e) => {
     update((list) => {
       list = [...list];
       for (let i of list) {
-        if (i["key"] === username) {
+        if (i["username"] === username) {
           i["selected"] = true;
         } else {
           i["selected"] = false;
@@ -45,7 +51,12 @@ function ListItem({ username, content, selected, update }) {
         <View style={styles.smallCircle}></View>
         <View style={[styles.smallCircle, styles.mb]}></View>
       </Pressable>
-      <FloatingMenu open={menuOpen} setOpen={setMenuState} />
+      <FloatingMenu
+        open={menuOpen}
+        setOpen={setMenuState}
+        updateModal={openUpdateModal}
+        username={username}
+      />
     </Pressable>
   );
 }
