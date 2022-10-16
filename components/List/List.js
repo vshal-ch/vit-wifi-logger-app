@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FlatList } from "react-native";
-import AddModal from "./AddModal";
+import AddModal from "../Form/AddModal";
 import ListItem from "./ListItem";
 
 export default function List(props) {
@@ -10,7 +10,7 @@ export default function List(props) {
   });
   const openModal = (username) => {
     setModalState((s) => {
-      s = {s}
+      s = { s };
       let data = props.data.find((e) => e.username == username);
       s.data = data;
       s.open = true;

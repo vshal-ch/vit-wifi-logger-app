@@ -1,10 +1,29 @@
-import { View, Text, StyleSheet, Pressable } from "react-native";
-import React from "react";
+import { View, Text, StyleSheet, Pressable, Alert } from "react-native";
+import { React, useContext } from "react";
+import { ListContext } from "./ListContext";
 
 const FloatingMenu = ({ open, setOpen, updateModal, username }) => {
-  const handleClick = () => {
+  const { setCredList } = useContext(ListContext);
+  const updateHelper = () => {
+    setOpen(false);
     updateModal(username);
     setOpen(false);
+  };
+  const deleteCred = () => {
+    setCredList((list) => list.filter((i) => i.username != username));
+  };
+  const deleteHelper = () => {
+    setOpen(false);
+    Alert.alert("Are you sure about that?", undefined, [
+      {
+        text: "No",
+        style: "cancel",
+      },
+      {
+        text: "Yes",
+        onPress: deleteCred,
+      },
+    ]);
   };
   return (
     <Pressable
@@ -12,10 +31,10 @@ const FloatingMenu = ({ open, setOpen, updateModal, username }) => {
       onPress={() => setOpen(false)}
     >
       <View style={styles.menu}>
-        <Pressable style={styles.action} onPress={handleClick}>
+        <Pressable style={styles.action} onPress={updateHelper}>
           <Text style={[styles.colorText]}>Update</Text>
         </Pressable>
-        <Pressable style={styles.action}>
+        <Pressable style={styles.action} onPress={deleteHelper}>
           <Text style={[styles.colorText]}>Delete</Text>
         </Pressable>
         <Pressable

@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import Title from "./components/Title";
-import {ListParent} from "./components/ListParent";
+import { ListParent } from "./components/List/ListParent";
 import ActionButtons from "./components/ActionButtons";
 import { StatusBar } from "react-native";
 
