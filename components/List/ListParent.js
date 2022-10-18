@@ -1,21 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import List from "./List";
 import AddCredCTA from "../Form/AddCredCTA";
 import { ListContext } from "../ListContext";
 
 export function ListParent() {
-  const [credList, setCredList] = useState([
-    {
-      username: "19BCI0086",
-      password: "asdf",
-      key: "19BCI0086",
-      alias: "19BCI0086",
-      selected: true,
-    },
-  ]);
+  const {credList,setCredList} = useContext(ListContext);
   return (
-    <ListContext.Provider value={{ setCredList }}>
       <View style={styles.container}>
         <View
           style={[
@@ -33,7 +24,6 @@ export function ListParent() {
         </View>
         <AddCredCTA list={credList} addItem={setCredList} />
       </View>
-    </ListContext.Provider>
   );
 }
 

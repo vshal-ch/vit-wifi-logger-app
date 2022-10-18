@@ -1,14 +1,8 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { useState } from "react";
-import FloatingMenu from "../FloatingMenu";
+import FloatingMenu from "./FloatingMenu";
 
-function ListItem({
-  username,
-  content,
-  selected,
-  update,
-  openUpdateModal,
-}) {
+function ListItem({ username, content, selected, update, openUpdateModal }) {
   const [menuOpen, setMenuState] = useState(false);
   const helper = (e) => {
     update((list) => {

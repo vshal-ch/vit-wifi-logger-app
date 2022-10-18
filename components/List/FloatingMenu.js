@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Pressable, Alert } from "react-native";
 import { React, useContext } from "react";
-import { ListContext } from "./ListContext";
+import { ListContext } from "../ListContext";
 
 const FloatingMenu = ({ open, setOpen, updateModal, username }) => {
   const { setCredList } = useContext(ListContext);
@@ -10,7 +10,21 @@ const FloatingMenu = ({ open, setOpen, updateModal, username }) => {
     setOpen(false);
   };
   const deleteCred = () => {
-    setCredList((list) => list.filter((i) => i.username != username));
+    setCredList((list) => {
+      let newlist = [];
+      let flag = 0;
+      for (let i = 0; i < list.length; i++) {
+        if (list[i].username === username) {
+          flag = list[i].selected;
+        } else {
+          newlist.push(list[i]);
+        }
+      }
+      if (newlist.length > 0 && flag) {
+        newlist[0].selected = true;
+      }
+      return newlist;
+    });
   };
   const deleteHelper = () => {
     setOpen(false);
