@@ -2,28 +2,28 @@ import { useContext, useState } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import List from "./List";
 import AddCredCTA from "../Form/AddCredCTA";
-import { ListContext } from "../ListContext";
+import { ListContext } from "./ListContext";
 
 export function ListParent() {
-  const {credList,setCredList} = useContext(ListContext);
+  const { credList, setCredList } = useContext(ListContext);
   return (
-      <View style={styles.container}>
-        <View
-          style={[
-            styles.listParent,
-            credList.length ? null : styles.containerEmpty,
-          ]}
-        >
-          {credList.length > 0 ? (
-            <List data={credList} updateList={setCredList} />
-          ) : (
-            <Text style={{ color: "white", fontSize: 16 }}>
-              Add a new credential below
-            </Text>
-          )}
-        </View>
-        <AddCredCTA list={credList} addItem={setCredList} />
+    <View style={styles.container}>
+      <View
+        style={[
+          styles.listParent,
+          credList.length ? null : styles.containerEmpty,
+        ]}
+      >
+        {credList.length > 0 ? (
+          <List data={credList} updateList={setCredList} />
+        ) : (
+          <Text style={{ color: "white", fontSize: 16 }}>
+            Add a new credential below
+          </Text>
+        )}
       </View>
+      <AddCredCTA list={credList} addItem={setCredList} />
+    </View>
   );
 }
 

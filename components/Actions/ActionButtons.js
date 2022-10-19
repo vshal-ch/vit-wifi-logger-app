@@ -2,23 +2,27 @@ import { React, useContext } from "react";
 import { View, Pressable, Image, Text, StyleSheet } from "react-native";
 import { logout } from "./Logout";
 import { login } from "./Login";
-import { ListContext } from "./ListContext";
+import { ListContext } from "../List/ListContext";
+import { ToastContext } from "../Toast/ToastContext";
 
 export default function ActionButtons() {
   const { credList } = useContext(ListContext);
-
+  const { setToast } = useContext(ToastContext);
   return (
     <View style={{ flex: 1 }}>
       <Pressable
         style={styles.loginBtn}
         onPress={() => {
-          login(credList.filter((i) => i.selected));
+          login(
+            credList.filter((i) => i.selected),
+            setToast
+          );
         }}
       >
-        <Image style={styles.img} source={require("../assets/logo.png")} />
+        <Image style={styles.img} source={require("../../assets/logo.png")} />
         <Text style={styles.loginText}>login</Text>
       </Pressable>
-      <Pressable style={styles.logoutBtn} onPress={logout}>
+      <Pressable style={styles.logoutBtn} onPress={() => logout(setToast)}>
         <Text>logout</Text>
       </Pressable>
     </View>

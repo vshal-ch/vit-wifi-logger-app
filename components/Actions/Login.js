@@ -1,32 +1,32 @@
-import { showToast } from "./ToastHelper";
+import { showToast } from "../Toast/ToastHelper";
 
 const LOGINURL =
   "http://phc.prontonetworks.com/cgi-bin/authlogin?URI=http://captive.apple.com/hotspot-detect.html";
 
-const chooseToast = (text) => {
+const chooseToast = (text, setToast) => {
   if (text.includes("Successful Pronto Authentication")) {
-    showToast("Login Successful");
+    showToast("Login Successful", setToast);
   } else if (
     text.includes(
       "Sorry, please check your username and password and try again"
     )
   ) {
-    showToast("Incorrect credentials!");
+    showToast("Incorrect credentials!", setToast);
   } else if (
     text.trim() ===
     '<html><head><meta http-equiv="refresh" content="0;url=http://captive.apple.com/hotspot-detect.html"></head></html>'
   ) {
-    showToast("Already connected");
+    showToast("Already connected", setToast);
   } else if (
     text.trim().includes("https://www.prontonetworks.com/xmlrpc.php")
   ) {
-    showToast("Please connect to VIT Wifi");
+    showToast("Please connect to VIT Wifi", setToast);
   }
 };
 
-export const login = async (item) => {
+export const login = async (item, setToast) => {
   if (item.length < 1) {
-    showToast("No credentials found!");
+    showToast("No credentials found!", setToast);
     return;
   }
   try {
@@ -44,18 +44,8 @@ export const login = async (item) => {
     });
 
     let text = await resp.text();
-    chooseToast(text);
+    chooseToast(text, setToast);
   } catch (e) {
-    showToast("No connection");
+    showToast("No connection", setToast);
   }
 };
-
-//connection successful
-{
-  /* <html><head><title>Successful Pronto Authentication</title> */
-}
-//if wrong credentials
-//Sorry, please check your username and password and try again
-// if already connected to wifi
-//check if the response text === <html><head><meta http-equiv="refresh" content="0;url=http://captive.apple.com/hotspot-detect.html"></head></html>
-//

@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import InputField from "./InputField";
 import { useState, useContext } from "react";
-import { ListContext } from "../ListContext";
+import { ListContext } from "../List/ListContext";
 
 const Form = ({ setVisible, formdata }) => {
   const { setCredList } = useContext(ListContext);

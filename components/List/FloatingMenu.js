@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Pressable, Alert } from "react-native";
 import { React, useContext } from "react";
-import { ListContext } from "../ListContext";
+import { ListContext } from "./ListContext";
 
 const FloatingMenu = ({ open, setOpen, updateModal, username }) => {
   const { setCredList } = useContext(ListContext);
