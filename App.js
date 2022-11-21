@@ -1,5 +1,5 @@
 import { StyleSheet, View, SafeAreaView, StatusBar } from "react-native";
-import { React, useState } from "react";
+import { useState } from "react";
 import Title from "./components/Title";
 import { ListParent } from "./components/List/ListParent";
 import ActionButtons from "./components/Actions/ActionButtons";
@@ -27,7 +27,7 @@ export default function App() {
     count: 0,
   });
   return (
-    <SafeAreaView style={styles.areaView}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#343434" }}>
       <View style={styles.mainContainer}>
         <ToastContext.Provider value={{ toast, setToast }}>
           <StatusBar barStyle={"light-content"} backgroundColor={"#343434"} />
@@ -48,7 +48,6 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  areaView: { flex: 1, backgroundColor: "#343434" },
   mainContainer: {
     flex: 1,
     backgroundColor: "#343434",

@@ -12,9 +12,7 @@ const AddModal = ({ visible, setVisible, data }) => {
     >
       <View style={styles.container}>
         <View style={{ marginBottom: 24 }}>
-          <Text style={[styles.mainTitle, styles.colorWhite]}>
-            {data ? "update" : "add"}
-          </Text>
+          <Text style={[styles.mainTitle, styles.colorWhite]}>{data ? "update" : "add"}</Text>
           <Text style={[styles.mainTitle, styles.colorWhite]}>credentials</Text>
         </View>
         <Form setVisible={setVisible} formdata={data} />

@@ -1,5 +1,4 @@
 import { showToast } from "../Toast/ToastHelper";
-import { ToastAndroid } from "react-native";
 
 const LOGINURL =
   "http://phc.prontonetworks.com/cgi-bin/authlogin?URI=http://captive.apple.com/hotspot-detect.html";
@@ -47,7 +46,6 @@ export const login = async (item, setToast) => {
     let text = await resp.text();
     chooseToast(text, setToast);
   } catch (e) {
-    ToastAndroid.show(e.toString(),ToastAndroid.LONG)
     showToast("No connection", setToast);
   }
 };
