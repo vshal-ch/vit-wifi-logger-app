@@ -1,5 +1,4 @@
 {
-  "expo": {
     "name": "wificonnector",
     "slug": "wificonnector",
     "version": "1.0.0",
@@ -19,21 +18,5 @@
     ],
     "ios": {
       "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      },
-      "package": "com.vshalch.wificonnector"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "f46818fd-a412-4845-ab31-e00575caf19c"
-      }
     }
-  }
 }

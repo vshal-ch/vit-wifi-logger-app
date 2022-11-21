@@ -1,5 +1,5 @@
 import { Pressable, Text, StyleSheet } from "react-native";
-import { useState } from "react";
+import { useState, React } from "react";
 import AddModal from "./AddModal";
 
 const AddCredCTA = (props) => {
