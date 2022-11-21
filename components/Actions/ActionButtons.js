@@ -1,5 +1,11 @@
 import { React, useContext } from "react";
-import { View, Pressable, Image, Text, StyleSheet } from "react-native";
+import {
+  View,
+  Image,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import { logout } from "./Logout";
 import { login } from "./Login";
 import { ListContext } from "../List/ListContext";
@@ -10,7 +16,7 @@ export default function ActionButtons() {
   const { setToast } = useContext(ToastContext);
   return (
     <View style={{ flex: 1 }}>
-      <Pressable
+      <TouchableOpacity
         style={styles.loginBtn}
         onPress={() => {
           login(
@@ -21,10 +27,13 @@ export default function ActionButtons() {
       >
         <Image style={styles.img} source={require("../../assets/logo.png")} />
         <Text style={styles.loginText}>login</Text>
-      </Pressable>
-      <Pressable style={styles.logoutBtn} onPress={() => logout(setToast)}>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.logoutBtn}
+        onPress={() => logout(setToast)}
+      >
         <Text>logout</Text>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 }
